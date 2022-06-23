@@ -4,7 +4,7 @@ import sys
 from exceptions import NoArguments, WrongPathName
 
 
-PATH_FILE = 'paths.txt'
+PATH_FILE = r'G:\\программирование new\\pathbinder\\paths.txt'
 
 def arg_parser(args: list) -> None:
 	command = args[1] if len(args) > 1 else None
