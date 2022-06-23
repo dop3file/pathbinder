@@ -1,1 +1,2 @@
-pathbinder G:\\программирование new\\pathbinder
+pathbinder G:\программирование new\pathbinder
+shop G:\фриланс\shop_btc\greed\shop_btc\core.py
