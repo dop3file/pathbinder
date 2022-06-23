@@ -42,7 +42,7 @@ def open_path(name: str) -> None:
 
 			directorys = directorys[1:-1]
 
-			os.system(disk)
+			os.chdir(disk)
 			os.chdir('../' * (all_lines[name].count('\\') + 1))
 
 			for directory in directorys:
