@@ -1,5 +1,6 @@
 import os
 import sys
+import subprocess
 
 from exceptions import NoArguments, WrongPathName
 
@@ -33,8 +34,10 @@ def set_new_path(path: str, name: str) -> None:
 
 def open_path(name: str) -> None:
     try:
-        with open(PATH_FILE, 'r', encoding='utf-8') as file:
+        with open(PATH_FILE, 'r', encoding='windows-1251') as file:
             all_lines = {line.strip().split(' ')[0]:line[len(line.strip().split(' ')[0]) + 1:-1].replace(r'\\\\','') for line in file}
+            
+            explorer_path = all_lines[name]
             directorys = all_lines[name].split('\\')
             disk = directorys[0]
             file_to_open = directorys[-1]
@@ -43,10 +46,13 @@ def open_path(name: str) -> None:
 
             os.chdir(disk)
             os.chdir('../' * (all_lines[name].count('\\') + 1))
-
+            
+            subprocess.Popen(rf'explorer /select,"{explorer_path}"')
             for directory in directorys:
                 os.chdir(directory)
 
+            #print(explorer_path)
+            #subprocess.Popen(rf'explorer /select,"{explorer_path}"')
             print(os.system(f'py {file_to_open}'))
     except KeyError:
         raise WrongPathName
